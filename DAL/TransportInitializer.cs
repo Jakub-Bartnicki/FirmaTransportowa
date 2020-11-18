@@ -13,8 +13,8 @@ namespace FirmaTransportowa.DAL
         {
             var products = new List<Product>
             {
-                new Product{Name="Zasoby",Description="Duzo zasobow",BuyPrice=9.99,Weight=100},
-                new Product{Name="Paczka",Description="Mala paczka",BuyPrice=4.99,Weight=15.5}
+                new Product{Name="Zasoby",Description="Duzo zasobow",BuyPrice=9.99M,Weight=100},
+                new Product{Name="Paczka",Description="Mala paczka",BuyPrice=4.99M,Weight=15.5M}
             };
             products.ForEach(x => context.Products.Add(x));
             context.SaveChanges();

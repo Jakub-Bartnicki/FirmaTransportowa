@@ -6,16 +6,15 @@ using System.Web;
 
 namespace FirmaTransportowa.Models
 {
-    public class WarehouseProduct
+    public class OrderProduct
     {
-        public int WarehouseProductID { get; set; }
-        public int WarehouseID { get; set; }
+        public int OrderProductID { get; set; }
+        public int OrderID { get; set; }
         public int ProductID { get; set; }
-        public int QuantityInStock { get; set; }
-        public int MaxQuantity { get; set; }
+        public int Quantity { get; set; }
 
         [Required]
-        public virtual Warehouse Warehouse { get; set; }
+        public virtual Order Order { get; set; }
         [Required]
         public virtual Product Product { get; set; }
     }

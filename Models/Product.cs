@@ -10,8 +10,8 @@ namespace FirmaTransportowa.Models
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public double BuyPrice { get; set; }
-        public double Weight { get; set; }
+        public Decimal BuyPrice { get; set; }
+        public Decimal Weight { get; set; }
 
         public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
     }

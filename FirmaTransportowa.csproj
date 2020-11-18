@@ -135,16 +135,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011171635311_InitialCreate.cs" />
-    <Compile Include="Migrations\202011171635311_InitialCreate.designer.cs">
-      <DependentUpon>202011171635311_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011171924324_InitialCreate1.cs" />
-    <Compile Include="Migrations\202011171924324_InitialCreate1.designer.cs">
-      <DependentUpon>202011171924324_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\202011182339303_InitialCreate.cs" />
+    <Compile Include="Migrations\202011182339303_InitialCreate.designer.cs">
+      <DependentUpon>202011182339303_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderProduct.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PersonDetails.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Route.cs" />
+    <Compile Include="Models\Semitrailer.cs" />
+    <Compile Include="Models\Transport.cs" />
+    <Compile Include="Models\Truck.cs" />
     <Compile Include="Models\Warehouse.cs" />
     <Compile Include="Models\WarehouseProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,11 +217,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011171635311_InitialCreate.resx">
-      <DependentUpon>202011171635311_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011171924324_InitialCreate1.resx">
-      <DependentUpon>202011171924324_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011182339303_InitialCreate.resx">
+      <DependentUpon>202011182339303_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
