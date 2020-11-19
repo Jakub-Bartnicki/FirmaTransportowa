@@ -11,6 +11,7 @@ namespace FirmaTransportowa.Models
         public int CustomerID { get; set; }
         public int PersonDetailsID { get; set; }
         public int AccountID { get; set; }
+        [MaxLength(20)]
         public String Name { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }

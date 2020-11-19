@@ -13,7 +13,9 @@ namespace FirmaTransportowa.Models
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
         public DateTime ShippedDate { get; set; }
+        [MaxLength(20)]
         public String Status { get; set; }
+        [MaxLength(255)]
         public String Comments { get; set; }
         public Decimal Price { get; set; }
 

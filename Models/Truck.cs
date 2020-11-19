@@ -10,11 +10,15 @@ namespace FirmaTransportowa.Models
     {
         public int TruckID { get; set; }
         public int SemitrailerID { get; set; }
+        [MaxLength(10)]
         public String RegistrationNr { get; set; }
+        [MaxLength(40)]
         public String Brand { get; set; }
+        [MaxLength(40)]
         public String Model { get; set; }
         public DateTime ProductionYear { get; set; }
         public int Mileage { get; set; }
+        [MaxLength(17)]
         public String VIN { get; set; }
 
         public virtual Route Route { get; set; }

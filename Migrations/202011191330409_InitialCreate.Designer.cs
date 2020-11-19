@@ -13,7 +13,7 @@ namespace FirmaTransportowa.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202011182339303_InitialCreate"; }
+            get { return "202011191330409_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

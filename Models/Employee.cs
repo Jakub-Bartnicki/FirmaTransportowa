@@ -12,7 +12,7 @@ namespace FirmaTransportowa.Models
         public int ManagerID { get; set; }
         public int PersonDetailsID { get; set; }
         public int AccountID { get; set; }
-        public String Email { get; set; }
+        [MaxLength(100)]
         public String JobTitle { get; set; }
         public Decimal Salary { get; set; }
 

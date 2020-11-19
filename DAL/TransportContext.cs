@@ -29,6 +29,27 @@ namespace FirmaTransportowa.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Employee>()
+                .Property(p => p.Salary)
+                .HasPrecision(10, 2);
+            modelBuilder.Entity<Order>()
+                .Property(p => p.Price)
+                .HasPrecision(10, 2);
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Amount)
+                .HasPrecision(10, 2);
+            modelBuilder.Entity<Product>()
+                .Property(p => p.BuyPrice)
+                .HasPrecision(10, 2);
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Weight)
+                .HasPrecision(10, 3);
+            modelBuilder.Entity<Route>()
+                .Property(p => p.Distance)
+                .HasPrecision(9, 3);
+            modelBuilder.Entity<Semitrailer>()
+                .Property(p => p.Capacity)
+                .HasPrecision(10, 3);
         }
     }
 }

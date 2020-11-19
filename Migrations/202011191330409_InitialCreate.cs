@@ -14,10 +14,10 @@
                 c => new
                     {
                         AccountID = c.Int(nullable: false, identity: true),
-                        Login = c.String(),
+                        Login = c.String(maxLength: 50),
                         CreationDate = c.DateTime(nullable: false),
-                        PasswordHash = c.String(),
-                        Email = c.String(),
+                        PasswordHash = c.String(maxLength: 255),
+                        Email = c.String(maxLength: 255),
                     })
                 .PrimaryKey(t => t.AccountID);
             
@@ -28,7 +28,7 @@
                         CustomerID = c.Int(nullable: false),
                         PersonDetailsID = c.Int(nullable: false),
                         AccountID = c.Int(nullable: false),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 20),
                     })
                 .PrimaryKey(t => t.CustomerID)
                 .ForeignKey("dbo.Account", t => t.CustomerID)
@@ -44,9 +44,9 @@
                         OrderDate = c.DateTime(nullable: false),
                         RequiredDate = c.DateTime(nullable: false),
                         ShippedDate = c.DateTime(nullable: false),
-                        Status = c.String(),
-                        Comments = c.String(),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Status = c.String(maxLength: 20),
+                        Comments = c.String(maxLength: 255),
+                        Price = c.Decimal(nullable: false, precision: 10, scale: 2),
                     })
                 .PrimaryKey(t => t.OrderID)
                 .ForeignKey("dbo.Customer", t => t.CustomerID, cascadeDelete: true)
@@ -72,10 +72,10 @@
                 c => new
                     {
                         AddressID = c.Int(nullable: false, identity: true),
-                        Country = c.String(),
-                        PostalCode = c.String(),
-                        City = c.String(),
-                        Street = c.String(),
+                        Country = c.String(maxLength: 40),
+                        PostalCode = c.String(maxLength: 40),
+                        City = c.String(maxLength: 100),
+                        Street = c.String(maxLength: 100),
                         Route_RouteID = c.Int(),
                     })
                 .PrimaryKey(t => t.AddressID)
@@ -88,8 +88,8 @@
                     {
                         PersonDetailsID = c.Int(nullable: false),
                         AddressID = c.Int(nullable: false),
-                        FirstName = c.String(),
-                        LastName = c.String(),
+                        FirstName = c.String(maxLength: 60),
+                        LastName = c.String(maxLength: 60),
                         Phone = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PersonDetailsID)
@@ -104,9 +104,8 @@
                         ManagerID = c.Int(nullable: false),
                         PersonDetailsID = c.Int(nullable: false),
                         AccountID = c.Int(nullable: false),
-                        Email = c.String(),
-                        JobTitle = c.String(),
-                        Salary = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        JobTitle = c.String(maxLength: 100),
+                        Salary = c.Decimal(nullable: false, precision: 10, scale: 2),
                         Transport_TransportID = c.Int(),
                     })
                 .PrimaryKey(t => t.EmployeeID)
@@ -155,7 +154,7 @@
                         TruckID = c.Int(nullable: false),
                         LoadingAddressID = c.Int(nullable: false),
                         DestinationAddressID = c.Int(nullable: false),
-                        Distance = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Distance = c.Decimal(nullable: false, precision: 9, scale: 3),
                     })
                 .PrimaryKey(t => t.RouteID);
             
@@ -165,12 +164,12 @@
                     {
                         TruckID = c.Int(nullable: false, identity: true),
                         SemitrailerID = c.Int(nullable: false),
-                        RegistrationNr = c.String(),
-                        Brand = c.String(),
-                        Model = c.String(),
+                        RegistrationNr = c.String(maxLength: 10),
+                        Brand = c.String(maxLength: 40),
+                        Model = c.String(maxLength: 40),
                         ProductionYear = c.DateTime(nullable: false),
                         Mileage = c.Int(nullable: false),
-                        VIN = c.String(),
+                        VIN = c.String(maxLength: 17),
                         Route_RouteID = c.Int(),
                         Transport_TransportID = c.Int(),
                     })
@@ -185,8 +184,8 @@
                 c => new
                     {
                         SemitrailerID = c.Int(nullable: false, identity: true),
-                        RegistrationNr = c.String(),
-                        Capacity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        RegistrationNr = c.String(maxLength: 10),
+                        Capacity = c.Decimal(nullable: false, precision: 10, scale: 3),
                         Truck_TruckID = c.Int(),
                     })
                 .PrimaryKey(t => t.SemitrailerID)
@@ -197,18 +196,20 @@
                 "dbo.Payment",
                 c => new
                     {
-                        PaymentID = c.String(nullable: false, maxLength: 128),
+                        PaymentID = c.String(nullable: false, maxLength: 255),
                         OrderID = c.Int(nullable: false),
                         PaymentDate = c.DateTime(nullable: false),
-                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Amount = c.Decimal(nullable: false, precision: 10, scale: 2),
                         Order_OrderID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PaymentID)
                 .ForeignKey("dbo.Order", t => t.Order_OrderID)
                 .Index(t => t.Order_OrderID);
             
-            AlterColumn("dbo.Product", "BuyPrice", c => c.Decimal(nullable: false, precision: 18, scale: 2));
-            AlterColumn("dbo.Product", "Weight", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+            AlterColumn("dbo.Product", "Name", c => c.String(maxLength: 60));
+            AlterColumn("dbo.Product", "Description", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Product", "BuyPrice", c => c.Decimal(nullable: false, precision: 10, scale: 2));
+            AlterColumn("dbo.Product", "Weight", c => c.Decimal(nullable: false, precision: 10, scale: 3));
             AlterColumn("dbo.Warehouse", "WarehouseID", c => c.Int(nullable: false));
             AddPrimaryKey("dbo.Warehouse", "WarehouseID");
             CreateIndex("dbo.Warehouse", "WarehouseID");
@@ -259,6 +260,8 @@
             AlterColumn("dbo.Warehouse", "WarehouseID", c => c.Int(nullable: false, identity: true));
             AlterColumn("dbo.Product", "Weight", c => c.Double(nullable: false));
             AlterColumn("dbo.Product", "BuyPrice", c => c.Double(nullable: false));
+            AlterColumn("dbo.Product", "Description", c => c.String());
+            AlterColumn("dbo.Product", "Name", c => c.String());
             DropTable("dbo.Payment");
             DropTable("dbo.Semitrailer");
             DropTable("dbo.Truck");

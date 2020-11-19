@@ -8,6 +8,7 @@ namespace FirmaTransportowa.Models
 {
     public class Payment
     {
+        [MaxLength(255)]
         public String PaymentID { get; set; }
         public int OrderID { get; set; }
         public DateTime PaymentDate { get; set; }

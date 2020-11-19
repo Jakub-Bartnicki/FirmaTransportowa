@@ -10,7 +10,9 @@ namespace FirmaTransportowa.Models
     {
         public int PersonDetailsID { get; set; }
         public int AddressID { get; set; }
+        [MaxLength(60)]
         public String FirstName { get; set; }
+        [MaxLength(60)]
         public String LastName { get; set; }
         public int Phone { get; set; }
 
