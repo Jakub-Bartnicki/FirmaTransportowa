@@ -9,12 +9,12 @@ namespace FirmaTransportowa.Models
 {
     public class Route
     {
-        public int RouteID { get; set; }
-        public int TruckID { get; set; }
+        public Int32 RouteID { get; set; }
+        public Int32 TruckID { get; set; }
         [ForeignKey("Addresses")]
-        public int LoadingAddressID { get; set; }
+        public Int32 LoadingAddressID { get; set; }
         [ForeignKey("Addresses")]
-        public int DestinationAddressID { get; set; }
+        public Int32 DestinationAddressID { get; set; }
         public Decimal Distance { get; set; }
 
         public virtual Transport Transport { get; set; }

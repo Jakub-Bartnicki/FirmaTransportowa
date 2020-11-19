@@ -8,13 +8,13 @@ namespace FirmaTransportowa.Models
 {
     public class PersonDetails
     {
-        public int PersonDetailsID { get; set; }
-        public int AddressID { get; set; }
+        public Int32 PersonDetailsID { get; set; }
+        public Int32 AddressID { get; set; }
         [MaxLength(60)]
         public String FirstName { get; set; }
         [MaxLength(60)]
         public String LastName { get; set; }
-        public int Phone { get; set; }
+        public Int32 Phone { get; set; }
 
         public virtual Customer Customer { get; set; }
         [Required]

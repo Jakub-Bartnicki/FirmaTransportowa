@@ -8,7 +8,7 @@ namespace FirmaTransportowa.Models
 {
     public class Product
     {
-        public int ProductID { get; set; }
+        public Int32 ProductID { get; set; }
         [MaxLength(60)]
         public String Name { get; set; }
         [MaxLength(255)]

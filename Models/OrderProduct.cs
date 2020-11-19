@@ -8,10 +8,10 @@ namespace FirmaTransportowa.Models
 {
     public class OrderProduct
     {
-        public int OrderProductID { get; set; }
-        public int OrderID { get; set; }
-        public int ProductID { get; set; }
-        public int Quantity { get; set; }
+        public Int32 OrderProductID { get; set; }
+        public Int32 OrderID { get; set; }
+        public Int32 ProductID { get; set; }
+        public Int32 Quantity { get; set; }
 
         [Required]
         public virtual Order Order { get; set; }

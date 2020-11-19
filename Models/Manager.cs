@@ -8,9 +8,9 @@ namespace FirmaTransportowa.Models
 {
     public class Manager
     {
-        public int ManagerID { get; set; }
-        public int PersonDetailsID { get; set; }
-        public int AccountID { get; set; }
+        public Int32 ManagerID { get; set; }
+        public Int32 PersonDetailsID { get; set; }
+        public Int32 AccountID { get; set; }
 
         [Required]
         public virtual PersonDetails PersonDetails { get; set; }

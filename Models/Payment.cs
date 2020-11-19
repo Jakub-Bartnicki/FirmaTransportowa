@@ -10,7 +10,7 @@ namespace FirmaTransportowa.Models
     {
         [MaxLength(255)]
         public String PaymentID { get; set; }
-        public int OrderID { get; set; }
+        public Int32 OrderID { get; set; }
         public DateTime PaymentDate { get; set; }
         public Decimal Amount { get; set; }
 

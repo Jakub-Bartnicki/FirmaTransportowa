@@ -8,7 +8,7 @@ namespace FirmaTransportowa.Models
 {
     public class Semitrailer
     {
-        public int SemitrailerID { get; set; }
+        public Int32 SemitrailerID { get; set; }
         [MaxLength(10)]
         public String RegistrationNr { get; set; }
         public Decimal Capacity { get; set; }

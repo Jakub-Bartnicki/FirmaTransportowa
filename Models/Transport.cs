@@ -8,11 +8,11 @@ namespace FirmaTransportowa.Models
 {
     public class Transport
     {
-        public int TransportID { get; set; }
-        public int RouteID { get; set; }
-        public int TruckID { get; set; }
-        public int EmployeeID { get; set; }
-        public int OrderID { get; set; }
+        public Int32 TransportID { get; set; }
+        public Int32 RouteID { get; set; }
+        public Int32 TruckID { get; set; }
+        public Int32 EmployeeID { get; set; }
+        public Int32 OrderID { get; set; }
         public DateTime DepartureDay { get; set; }
 
         [Required]

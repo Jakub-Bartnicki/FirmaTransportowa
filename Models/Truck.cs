@@ -8,8 +8,8 @@ namespace FirmaTransportowa.Models
 {
     public class Truck
     {
-        public int TruckID { get; set; }
-        public int SemitrailerID { get; set; }
+        public Int32 TruckID { get; set; }
+        public Int32 SemitrailerID { get; set; }
         [MaxLength(10)]
         public String RegistrationNr { get; set; }
         [MaxLength(40)]
@@ -17,7 +17,7 @@ namespace FirmaTransportowa.Models
         [MaxLength(40)]
         public String Model { get; set; }
         public DateTime ProductionYear { get; set; }
-        public int Mileage { get; set; }
+        public Int32 Mileage { get; set; }
         [MaxLength(17)]
         public String VIN { get; set; }
 

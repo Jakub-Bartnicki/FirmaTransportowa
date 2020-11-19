@@ -8,7 +8,7 @@ namespace FirmaTransportowa.Models
 {
     public class Account
     {
-        public int AccountID { get; set; }
+        public Int32 AccountID { get; set; }
         [MaxLength(50)]
         public String Login { get; set; }
         public DateTime CreationDate { get; set; }

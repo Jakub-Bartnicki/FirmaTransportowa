@@ -8,8 +8,8 @@ namespace FirmaTransportowa.Models
 {
     public class Order
     {
-        public int OrderID { get; set; }
-        public int CustomerID { get; set; }
+        public Int32 OrderID { get; set; }
+        public Int32 CustomerID { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
         public DateTime ShippedDate { get; set; }

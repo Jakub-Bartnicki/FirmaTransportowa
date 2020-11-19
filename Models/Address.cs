@@ -8,7 +8,7 @@ namespace FirmaTransportowa.Models
 {
     public class Address
     {
-        public int AddressID { get; set; }
+        public Int32 AddressID { get; set; }
         [MaxLength(40)]
         public String Country { get; set; }
         [MaxLength(40)]

@@ -8,9 +8,9 @@ namespace FirmaTransportowa.Models
 {
     public class Customer
     {
-        public int CustomerID { get; set; }
-        public int PersonDetailsID { get; set; }
-        public int AccountID { get; set; }
+        public Int32 CustomerID { get; set; }
+        public Int32 PersonDetailsID { get; set; }
+        public Int32 AccountID { get; set; }
         [MaxLength(20)]
         public String Name { get; set; }
 
