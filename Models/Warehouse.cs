@@ -14,5 +14,6 @@ namespace FirmaTransportowa.Models
         public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
         [Required]
         public virtual Address Address { get; set; }
+        public virtual Route Route { get; set; }
     }
 }

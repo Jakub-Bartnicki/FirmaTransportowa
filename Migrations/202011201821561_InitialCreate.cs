@@ -31,8 +31,8 @@
                         Name = c.String(maxLength: 20),
                     })
                 .PrimaryKey(t => t.CustomerID)
-                .ForeignKey("dbo.Account", t => t.CustomerID)
-                .ForeignKey("dbo.PersonDetails", t => t.CustomerID)
+                .ForeignKey("dbo.Account", t => t.CustomerID, cascadeDelete: true)
+                .ForeignKey("dbo.PersonDetails", t => t.CustomerID, cascadeDelete: true)
                 .Index(t => t.CustomerID);
             
             CreateTable(
@@ -76,11 +76,8 @@
                         PostalCode = c.String(maxLength: 40),
                         City = c.String(maxLength: 100),
                         Street = c.String(maxLength: 100),
-                        Route_RouteID = c.Int(),
                     })
-                .PrimaryKey(t => t.AddressID)
-                .ForeignKey("dbo.Route", t => t.Route_RouteID)
-                .Index(t => t.Route_RouteID);
+                .PrimaryKey(t => t.AddressID);
             
             CreateTable(
                 "dbo.PersonDetails",
@@ -93,7 +90,7 @@
                         Phone = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PersonDetailsID)
-                .ForeignKey("dbo.Address", t => t.PersonDetailsID)
+                .ForeignKey("dbo.Address", t => t.PersonDetailsID, cascadeDelete: true)
                 .Index(t => t.PersonDetailsID);
             
             CreateTable(
@@ -109,9 +106,9 @@
                         Transport_TransportID = c.Int(),
                     })
                 .PrimaryKey(t => t.EmployeeID)
-                .ForeignKey("dbo.Account", t => t.EmployeeID)
+                .ForeignKey("dbo.Account", t => t.EmployeeID, cascadeDelete: true)
                 .ForeignKey("dbo.Manager", t => t.ManagerID, cascadeDelete: true)
-                .ForeignKey("dbo.PersonDetails", t => t.EmployeeID)
+                .ForeignKey("dbo.PersonDetails", t => t.EmployeeID, cascadeDelete: true)
                 .ForeignKey("dbo.Transport", t => t.Transport_TransportID)
                 .Index(t => t.EmployeeID)
                 .Index(t => t.ManagerID)
@@ -126,8 +123,8 @@
                         AccountID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ManagerID)
-                .ForeignKey("dbo.Account", t => t.ManagerID)
-                .ForeignKey("dbo.PersonDetails", t => t.ManagerID)
+                .ForeignKey("dbo.Account", t => t.ManagerID, cascadeDelete: true)
+                .ForeignKey("dbo.PersonDetails", t => t.ManagerID, cascadeDelete: true)
                 .Index(t => t.ManagerID);
             
             CreateTable(
@@ -150,13 +147,16 @@
                 "dbo.Route",
                 c => new
                     {
-                        RouteID = c.Int(nullable: false, identity: true),
+                        RouteID = c.Int(nullable: false),
                         TruckID = c.Int(nullable: false),
-                        LoadingAddressID = c.Int(nullable: false),
-                        DestinationAddressID = c.Int(nullable: false),
+                        WarehouseID = c.Int(nullable: false),
+                        AddressID = c.Int(nullable: false),
                         Distance = c.Decimal(nullable: false, precision: 9, scale: 3),
                     })
-                .PrimaryKey(t => t.RouteID);
+                .PrimaryKey(t => t.RouteID)
+                .ForeignKey("dbo.Address", t => t.RouteID, cascadeDelete: true)
+                .ForeignKey("dbo.Warehouse", t => t.RouteID)
+                .Index(t => t.RouteID);
             
             CreateTable(
                 "dbo.Truck",
@@ -203,7 +203,7 @@
                         Order_OrderID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PaymentID)
-                .ForeignKey("dbo.Order", t => t.Order_OrderID)
+                .ForeignKey("dbo.Order", t => t.Order_OrderID, cascadeDelete: true)
                 .Index(t => t.Order_OrderID);
             
             AlterColumn("dbo.Product", "Name", c => c.String(maxLength: 60));
@@ -213,7 +213,7 @@
             AlterColumn("dbo.Warehouse", "WarehouseID", c => c.Int(nullable: false));
             AddPrimaryKey("dbo.Warehouse", "WarehouseID");
             CreateIndex("dbo.Warehouse", "WarehouseID");
-            AddForeignKey("dbo.Warehouse", "WarehouseID", "dbo.Address", "AddressID");
+            AddForeignKey("dbo.Warehouse", "WarehouseID", "dbo.Address", "AddressID", cascadeDelete: true);
             AddForeignKey("dbo.WarehouseProduct", "WarehouseID", "dbo.Warehouse", "WarehouseID", cascadeDelete: true);
         }
         
@@ -225,10 +225,11 @@
             DropForeignKey("dbo.OrderProduct", "ProductID", "dbo.Product");
             DropForeignKey("dbo.Warehouse", "WarehouseID", "dbo.Address");
             DropForeignKey("dbo.Transport", "TransportID", "dbo.Route");
+            DropForeignKey("dbo.Route", "RouteID", "dbo.Warehouse");
             DropForeignKey("dbo.Truck", "Transport_TransportID", "dbo.Transport");
             DropForeignKey("dbo.Semitrailer", "Truck_TruckID", "dbo.Truck");
             DropForeignKey("dbo.Truck", "Route_RouteID", "dbo.Route");
-            DropForeignKey("dbo.Address", "Route_RouteID", "dbo.Route");
+            DropForeignKey("dbo.Route", "RouteID", "dbo.Address");
             DropForeignKey("dbo.Transport", "TransportID", "dbo.Order");
             DropForeignKey("dbo.Employee", "Transport_TransportID", "dbo.Transport");
             DropForeignKey("dbo.Employee", "EmployeeID", "dbo.PersonDetails");
@@ -244,13 +245,13 @@
             DropIndex("dbo.Semitrailer", new[] { "Truck_TruckID" });
             DropIndex("dbo.Truck", new[] { "Transport_TransportID" });
             DropIndex("dbo.Truck", new[] { "Route_RouteID" });
+            DropIndex("dbo.Route", new[] { "RouteID" });
             DropIndex("dbo.Transport", new[] { "TransportID" });
             DropIndex("dbo.Manager", new[] { "ManagerID" });
             DropIndex("dbo.Employee", new[] { "Transport_TransportID" });
             DropIndex("dbo.Employee", new[] { "ManagerID" });
             DropIndex("dbo.Employee", new[] { "EmployeeID" });
             DropIndex("dbo.PersonDetails", new[] { "PersonDetailsID" });
-            DropIndex("dbo.Address", new[] { "Route_RouteID" });
             DropIndex("dbo.Warehouse", new[] { "WarehouseID" });
             DropIndex("dbo.OrderProduct", new[] { "ProductID" });
             DropIndex("dbo.OrderProduct", new[] { "OrderID" });

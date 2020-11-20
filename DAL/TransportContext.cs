@@ -32,24 +32,80 @@ namespace FirmaTransportowa.DAL
             modelBuilder.Entity<Employee>()
                 .Property(p => p.Salary)
                 .HasPrecision(10, 2);
+
             modelBuilder.Entity<Order>()
                 .Property(p => p.Price)
                 .HasPrecision(10, 2);
+
             modelBuilder.Entity<Payment>()
                 .Property(p => p.Amount)
                 .HasPrecision(10, 2);
+
             modelBuilder.Entity<Product>()
                 .Property(p => p.BuyPrice)
                 .HasPrecision(10, 2);
+
             modelBuilder.Entity<Product>()
                 .Property(p => p.Weight)
                 .HasPrecision(10, 3);
+
             modelBuilder.Entity<Route>()
                 .Property(p => p.Distance)
                 .HasPrecision(9, 3);
+
             modelBuilder.Entity<Semitrailer>()
                 .Property(p => p.Capacity)
                 .HasPrecision(10, 3);
+
+            modelBuilder.Entity<Order>()
+                .HasOptional(s => s.Payment)
+                .WithRequired(s => s.Order)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Warehouse>()
+                .HasRequired(s => s.Address)
+                .WithOptional(s => s.Warehouse)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<PersonDetails>()
+                .HasRequired(s => s.Address)
+                .WithOptional(s => s.PersonDetails)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Route>()
+                .HasRequired(s => s.Address)
+                .WithOptional(s => s.Route)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Customer>()
+                .HasRequired(s => s.PersonDetails)
+                .WithOptional(s => s.Customer)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Customer>()
+                .HasRequired(s => s.Account)
+                .WithOptional(s => s.Customer)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Manager>()
+                .HasRequired(s => s.PersonDetails)
+                .WithOptional(s => s.Manager)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Manager>()
+                .HasRequired(s => s.Account)
+                .WithOptional(s => s.Manager)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Employee>()
+                .HasRequired(s => s.PersonDetails)
+                .WithOptional(s => s.Employee)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Employee>()
+                .HasRequired(s => s.Account)
+                .WithOptional(s => s.Employee)
+                .WillCascadeOnDelete(true);
         }
     }
 }
