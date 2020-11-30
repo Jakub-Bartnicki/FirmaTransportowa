@@ -23,9 +23,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Employees", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("LogIn", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Trucks", "Index", "Trucks")</li>
+                    @if (Session["Login"] != null)
+                    {
+                        <li style="margin-left:30px"><a href="@Url.Action("Logout", "Home")">Logout</a></li>
+                    } else
+                    {
+                        <li style="margin-left:30px">@Html.ActionLink("Login", "Login", "Home")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Home")</li>
+                    }
                 </ul>
             </div>
         </div>
