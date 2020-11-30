@@ -11,107 +11,107 @@ using FirmaTransportowa.Models;
 
 namespace FirmaTransportowa.Controllers
 {
-    public class ProductController : Controller
+    public class TrucksController : Controller
     {
         private DAL.TransportContext db = new DAL.TransportContext();
 
-        // GET: Product
+        // GET: Trucks
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Trucks.ToList());
         }
 
-        // GET: Product/Details/5
+        // GET: Trucks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Truck truck = db.Trucks.Find(id);
+            if (truck == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(truck);
         }
 
-        // GET: Product/Create
+        // GET: Trucks/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Product/Create
+        // POST: Trucks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Description,BuyPrice,Weight")] Product product)
+        public ActionResult Create([Bind(Include = "TruckID,SemitrailerID,RegistrationNr,Brand,Model,ProductionYear,Mileage,VIN")] Truck truck)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Trucks.Add(truck);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            return View(truck);
         }
 
-        // GET: Product/Edit/5
+        // GET: Trucks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Truck truck = db.Trucks.Find(id);
+            if (truck == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(truck);
         }
 
-        // POST: Product/Edit/5
+        // POST: Trucks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,BuyPrice,Weight")] Product product)
+        public ActionResult Edit([Bind(Include = "TruckID,SemitrailerID,RegistrationNr,Brand,Model,ProductionYear,Mileage,VIN")] Truck truck)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(truck).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(truck);
         }
 
-        // GET: Product/Delete/5
+        // GET: Trucks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Truck truck = db.Trucks.Find(id);
+            if (truck == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(truck);
         }
 
-        // POST: Product/Delete/5
+        // POST: Trucks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Truck truck = db.Trucks.Find(id);
+            db.Trucks.Remove(truck);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

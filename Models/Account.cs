@@ -9,12 +9,15 @@ namespace FirmaTransportowa.Models
     public class Account
     {
         public Int32 AccountID { get; set; }
+        [Required]
         [MaxLength(50)]
         public String Login { get; set; }
         public DateTime CreationDate { get; set; }
+        [Required]
         [MaxLength(255)]
         public String PasswordHash { get; set; }
-        [MaxLength(255)]
+        [Required]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public String Email { get; set; }
 
         public virtual Employee Employee { get; set; }
