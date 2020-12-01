@@ -27,26 +27,46 @@ namespace FirmaTransportowa.Controllers
             }
         }
 
-        //GET: Register
+        // GET: Admin
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
+        // GET: Register
         public ActionResult Register()
         {
             return View();
         }
 
-        //POST: Register
+
+        // POST: Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Account _account)
+        public ActionResult Register(Customer _customer)
         {
             if (ModelState.IsValid)
             {
-                var check = _db.Accounts.FirstOrDefault(s => s.Email == _account.Email);
+                var check = _db.Accounts.FirstOrDefault(s => s.Email == _customer.Account.Email);
                 if (check == null)
                 {
-                    _account.PasswordHash = GetMD5(_account.PasswordHash);
-                    _account.CreationDate = DateTime.Now;
+                    _customer.Account.PasswordHash = GetMD5(_customer.Account.PasswordHash);
+                    _customer.Account.CreationDate = DateTime.Now;
                     _db.Configuration.ValidateOnSaveEnabled = false;
-                    _db.Accounts.Add(_account);
+
+                    var account = _customer.Account;
+                    var personalDetails = _customer.PersonDetails;
+                    var address = _customer.PersonDetails.Address;
+
+
+                    _db.Customers.Add(_customer);
+                    _customer.PersonDetailsID = personalDetails.PersonDetailsID;
+                    _customer.AccountID = account.AccountID;
+                    _customer.PersonDetails.AddressID = address.AddressID;
+                    _db.SaveChanges();
+                    _customer.PersonDetailsID = personalDetails.PersonDetailsID;
+                    _customer.AccountID = account.AccountID;
+                    _customer.PersonDetails.AddressID = address.AddressID;
                     _db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -55,19 +75,14 @@ namespace FirmaTransportowa.Controllers
                     ViewBag.error = "Email already exists";
                     return View();
                 }
-
-
             }
             return View();
-
-
         }
 
         public ActionResult Login()
         {
             return View();
         }
-
 
 
         [HttpPost]
@@ -96,16 +111,15 @@ namespace FirmaTransportowa.Controllers
         }
 
 
-        //Logout
+        // Logout
         public ActionResult Logout()
         {
-            Session.Clear();//remove session
+            Session.Clear(); // remove session
             return RedirectToAction("Login");
         }
 
 
-
-        //create a string MD5
+        // create a string MD5
         public static string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();

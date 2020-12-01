@@ -21,11 +21,11 @@ namespace FirmaTransportowa.Models
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public String Email { get; set; }
 
-
         [NotMapped]
         [Required]
         [Compare("PasswordHash")]
         public string ConfirmPassword { get; set; }
+
         public virtual Employee Employee { get; set; }
         public virtual Manager Manager { get; set; }
         public virtual Customer Customer { get; set; }

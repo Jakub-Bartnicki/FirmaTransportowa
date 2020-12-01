@@ -24,10 +24,12 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Trucks", "Index", "Trucks")</li>
+                    <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
                     @if (Session["Login"] != null)
                     {
                         <li style="margin-left:30px"><a href="@Url.Action("Logout", "Home")">Logout</a></li>
-                    } else
+                    }
+                    else
                     {
                         <li style="margin-left:30px">@Html.ActionLink("Login", "Login", "Home")</li>
                         <li>@Html.ActionLink("Register", "Register", "Home")</li>
