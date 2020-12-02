@@ -13,7 +13,7 @@ namespace FirmaTransportowa.Controllers
 {
     public class EmployeesController : Controller
     {
-        private TransportContext db = new TransportContext();
+        private DAL.TransportContext db = new DAL.TransportContext();
 
         // GET: Employees
         public ActionResult Index()
