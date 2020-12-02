@@ -1,18 +1,20 @@
-﻿@model FirmaTransportowa.Models.Customer
+﻿@model FirmaTransportowa.Models.Manager
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Register</h2>
+<h2>Create</h2>
 
-@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+@using (Html.BeginForm("Create", "Managers", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
+        <h4>Manager</h4>
         <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(m => m.Account.Login, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -50,14 +52,6 @@
             <div class="col-md-10">
                 @Html.PasswordFor(m => m.Account.ConfirmPassword, new { @class = "form-control", @placeholder = "Confim Password" })
                 @Html.ValidationMessageFor(m => m.Account.ConfirmPassword, "", new { @class = "badge badge-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name, "Nickname", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
-                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "badge badge-danger" })
             </div>
         </div>
 
@@ -119,8 +113,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" name="submit" class="btn btn-primary" value="Register" />
+                <input type="submit" name="submit" class="btn btn-primary" value="Create" />
             </div>
         </div>
     </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -13,7 +13,7 @@ namespace FirmaTransportowa.Controllers
 {
     public class HomeController : Controller
     {
-        private DAL.TransportContext _db = new DAL.TransportContext();
+        private DAL.TransportContext db = new DAL.TransportContext();
         // GET: Home
         public ActionResult Index()
         {
@@ -39,45 +39,53 @@ namespace FirmaTransportowa.Controllers
             return View();
         }
 
-
+        
         // POST: Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Customer _customer)
+        public ActionResult Register(Customer customer)
         {
             if (ModelState.IsValid)
             {
-                var check = _db.Accounts.FirstOrDefault(s => s.Email == _customer.Account.Email);
-                if (check == null)
+                var emailCheck = db.Accounts.FirstOrDefault(s => s.Email == customer.Account.Email);
+                var loginCheck = db.Accounts.FirstOrDefault(s => s.Login == customer.Account.Login);
+                if (emailCheck != null)
                 {
-                    _customer.Account.PasswordHash = GetMD5(_customer.Account.PasswordHash);
-                    _customer.Account.CreationDate = DateTime.Now;
-                    _db.Configuration.ValidateOnSaveEnabled = false;
-
-                    var account = _customer.Account;
-                    var personalDetails = _customer.PersonDetails;
-                    var address = _customer.PersonDetails.Address;
-
-
-                    _db.Customers.Add(_customer);
-                    _customer.PersonDetailsID = personalDetails.PersonDetailsID;
-                    _customer.AccountID = account.AccountID;
-                    _customer.PersonDetails.AddressID = address.AddressID;
-                    _db.SaveChanges();
-                    _customer.PersonDetailsID = personalDetails.PersonDetailsID;
-                    _customer.AccountID = account.AccountID;
-                    _customer.PersonDetails.AddressID = address.AddressID;
-                    _db.SaveChanges();
-                    return RedirectToAction("Index");
+                    ViewBag.emailError = "Email already exists";
+                    return View();
+                }
+                else if (loginCheck != null)
+                {
+                    ViewBag.loginError = "Choose another login";
+                    return View();
                 }
                 else
                 {
-                    ViewBag.error = "Email already exists";
-                    return View();
+                    customer.Account.PasswordHash = GetMD5(customer.Account.PasswordHash);
+                    customer.Account.CreationDate = DateTime.Now;
+                    customer.Account.Type = "customer";
+                    db.Configuration.ValidateOnSaveEnabled = false;
+
+                    var account = customer.Account;
+                    var personalDetails = customer.PersonDetails;
+                    var address = customer.PersonDetails.Address;
+
+
+                    db.Customers.Add(customer);
+                    customer.PersonDetailsID = personalDetails.PersonDetailsID;
+                    customer.AccountID = account.AccountID;
+                    customer.PersonDetails.AddressID = address.AddressID;
+                    db.SaveChanges();
+                    customer.PersonDetailsID = personalDetails.PersonDetailsID;
+                    customer.AccountID = account.AccountID;
+                    customer.PersonDetails.AddressID = address.AddressID;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
             }
             return View();
         }
+
 
         public ActionResult Login()
         {
@@ -87,18 +95,19 @@ namespace FirmaTransportowa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string email, string passwordHash)
+        public ActionResult Login(string login, string passwordHash)
         {
             if (ModelState.IsValid)
             {
                 var f_password = GetMD5(passwordHash);
-                var data = _db.Accounts.Where(s => s.Email.Equals(email) && s.PasswordHash.Equals(f_password)).ToList();
+                var data = db.Accounts.Where(s => s.Login.Equals(login) && s.PasswordHash.Equals(f_password)).ToList();
                 if (data.Count() > 0)
                 {
                     //add session
                     Session["Login"] = data.FirstOrDefault().Login;
                     Session["Email"] = data.FirstOrDefault().Email;
                     Session["AccountID"] = data.FirstOrDefault().AccountID;
+                    Session["Type"] = data.FirstOrDefault().Type;
                     return RedirectToAction("Index");
                 }
                 else

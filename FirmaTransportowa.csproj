@@ -126,7 +126,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagersController.cs" />
     <Compile Include="Controllers\TrucksController.cs" />
     <Compile Include="DAL\TransportContext.cs" />
     <Compile Include="DAL\TransportInitializer.cs" />
@@ -140,6 +142,10 @@
     <Compile Include="Migrations\202011301600121_AccountChangesMigration.cs" />
     <Compile Include="Migrations\202011301600121_AccountChangesMigration.Designer.cs">
       <DependentUpon>202011301600121_AccountChangesMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012011816595_AccountTypesMigration.cs" />
+    <Compile Include="Migrations\202012011816595_AccountTypesMigration.Designer.cs">
+      <DependentUpon>202012011816595_AccountTypesMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -204,10 +210,19 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Managers\Create.cshtml" />
+    <Content Include="Views\Managers\Delete.cshtml" />
+    <Content Include="Views\Managers\Details.cshtml" />
+    <Content Include="Views\Managers\Edit.cshtml" />
+    <Content Include="Views\Managers\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -228,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011301600121_AccountChangesMigration.resx">
       <DependentUpon>202011301600121_AccountChangesMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012011816595_AccountTypesMigration.resx">
+      <DependentUpon>202012011816595_AccountTypesMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
