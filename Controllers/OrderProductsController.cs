@@ -11,116 +11,116 @@ using FirmaTransportowa.Models;
 
 namespace FirmaTransportowa.Controllers
 {
-    public class WarehouseProductsController : Controller
+    public class OrderProductsController : Controller
     {
         private DAL.TransportContext db = new DAL.TransportContext();
 
-        // GET: WarehouseProducts
+        // GET: OrderProducts
         public ActionResult Index()
         {
-            var warehouseProducts = db.WarehouseProducts.Include(w => w.Product).Include(w => w.Warehouse);
-            return View(warehouseProducts.ToList());
+            var orderProducts = db.OrderProducts.Include(o => o.Order).Include(o => o.Product);
+            return View(orderProducts.ToList());
         }
 
-        // GET: WarehouseProducts/Details/5
+        // GET: OrderProducts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseProduct warehouseProduct = db.WarehouseProducts.Find(id);
-            if (warehouseProduct == null)
+            OrderProduct orderProduct = db.OrderProducts.Find(id);
+            if (orderProduct == null)
             {
                 return HttpNotFound();
             }
-            return View(warehouseProduct);
+            return View(orderProduct);
         }
 
-        // GET: WarehouseProducts/Create
+        // GET: OrderProducts/Create
         public ActionResult Create()
         {
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "Status");
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name");
-            ViewBag.WarehouseID = new SelectList(db.Warehouses, "WarehouseID", "WarehouseID");
             return View();
         }
 
-        // POST: WarehouseProducts/Create
+        // POST: OrderProducts/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WarehouseProductID,WarehouseID,ProductID,QuantityInStock,MaxQuantity")] WarehouseProduct warehouseProduct)
+        public ActionResult Create([Bind(Include = "OrderProductID,OrderID,ProductID,Quantity")] OrderProduct orderProduct)
         {
             if (ModelState.IsValid)
             {
-                db.WarehouseProducts.Add(warehouseProduct);
+                db.OrderProducts.Add(orderProduct);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", warehouseProduct.ProductID);
-            ViewBag.WarehouseID = new SelectList(db.Warehouses, "WarehouseID", "WarehouseID", warehouseProduct.WarehouseID);
-            return View(warehouseProduct);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "Status", orderProduct.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderProduct.ProductID);
+            return View(orderProduct);
         }
 
-        // GET: WarehouseProducts/Edit/5
+        // GET: OrderProducts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseProduct warehouseProduct = db.WarehouseProducts.Find(id);
-            if (warehouseProduct == null)
+            OrderProduct orderProduct = db.OrderProducts.Find(id);
+            if (orderProduct == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", warehouseProduct.ProductID);
-            ViewBag.WarehouseID = new SelectList(db.Warehouses, "WarehouseID", "WarehouseID", warehouseProduct.WarehouseID);
-            return View(warehouseProduct);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "Status", orderProduct.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderProduct.ProductID);
+            return View(orderProduct);
         }
 
-        // POST: WarehouseProducts/Edit/5
+        // POST: OrderProducts/Edit/5
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "WarehouseProductID,WarehouseID,ProductID,QuantityInStock,MaxQuantity")] WarehouseProduct warehouseProduct)
+        public ActionResult Edit([Bind(Include = "OrderProductID,OrderID,ProductID,Quantity")] OrderProduct orderProduct)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(warehouseProduct).State = EntityState.Modified;
+                db.Entry(orderProduct).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", warehouseProduct.ProductID);
-            ViewBag.WarehouseID = new SelectList(db.Warehouses, "WarehouseID", "WarehouseID", warehouseProduct.WarehouseID);
-            return View(warehouseProduct);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "Status", orderProduct.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderProduct.ProductID);
+            return View(orderProduct);
         }
 
-        // GET: WarehouseProducts/Delete/5
+        // GET: OrderProducts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WarehouseProduct warehouseProduct = db.WarehouseProducts.Find(id);
-            if (warehouseProduct == null)
+            OrderProduct orderProduct = db.OrderProducts.Find(id);
+            if (orderProduct == null)
             {
                 return HttpNotFound();
             }
-            return View(warehouseProduct);
+            return View(orderProduct);
         }
 
-        // POST: WarehouseProducts/Delete/5
+        // POST: OrderProducts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            WarehouseProduct warehouseProduct = db.WarehouseProducts.Find(id);
-            db.WarehouseProducts.Remove(warehouseProduct);
+            OrderProduct orderProduct = db.OrderProducts.Find(id);
+            db.OrderProducts.Remove(orderProduct);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
