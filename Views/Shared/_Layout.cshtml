@@ -24,8 +24,9 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Trucks", "Index", "Trucks")</li>
-                    <li>@Html.ActionLink("Order", "Index", "OrderProducts")</li>
-                    <li>@Html.ActionLink("Warehouse", "Index", "WarehouseProducts")</li>
+                    <li>@Html.ActionLink("OrderProduct", "Index", "OrderProduct")</li>
+                    <li>@Html.ActionLink("WarehouseProduct", "Index", "WarehouseProduct")</li>
+                    <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
                     @if (Session["Login"] != null && Session["Type"].ToString() == "admin")
                     {
                 <li>@Html.ActionLink("Managers", "Index", "Managers") </li>
