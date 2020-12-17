@@ -4,8 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<h2>Produkty</h2>
 <table class="table">
     <tr>
         <th>
@@ -38,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id = item.ProductID })
+            @Html.ActionLink("Szczegóły produktu", "Details", new { id = item.ProductID }, new { @class = "btn btn-info" })
         </td>
     </tr>
 }
