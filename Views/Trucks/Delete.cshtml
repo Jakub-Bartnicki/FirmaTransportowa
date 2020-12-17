@@ -4,19 +4,18 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Usuń ciężarówkę</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h2>Czy chcesz na pewno usunąć ciężarówkę?</h2>
 <div>
-    <h4>Truck</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.SemitrailerID)
+            @Html.DisplayNameFor(model => model.TruckID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SemitrailerID)
+            @Html.DisplayFor(model => model.TruckID)
         </dd>
 
         <dt>
@@ -73,8 +72,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Usuń" class="btn btn-warning" /> |
+            @Html.ActionLink("Powrót do listy", "Index")
         </div>
     }
 </div>
