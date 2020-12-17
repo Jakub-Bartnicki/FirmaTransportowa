@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h1 class="display-1">Produkty</h1>
-<p>
-    @Html.ActionLink("Dodaj nowy produkt", "Create")
-</p>
+<h2>Lista produktów</h2>
 
-<table class="table">
+<p>
+    @Html.ActionLink("Dodaj produkt", "Create")
+</p>
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            @Html.ActionLink("Edytuj produkt", "Edit", new { id=item.ProductID }, new { @class = "btn btn-warning" }) 
-            @Html.ActionLink("Szczegóły produktu", "Details", new { id = item.ProductID }, new {@class = "btn btn-info" }) 
-            @Html.ActionLink("Usuń produkt", "Delete", new { id=item.ProductID }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Edytuj produkt", "Edit", new { id=item.ProductID }, new { @class = "btn btn-outline-warning" }) |
+            @Html.ActionLink("Szczegóły produktu", "Details", new { id=item.ProductID }, new {@class = "btn btn-outline-info" }) |
+            @Html.ActionLink("Usuń produkt", "Delete", new { id=item.ProductID }, new {@class = "btn btn-outline-danger"})
         </td>
     </tr>
 }

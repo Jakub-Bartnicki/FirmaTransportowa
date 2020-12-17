@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h1 class="display-1">Szczegóły produktu</h1>
+<h2>Szczegóły produktu</h2>
 
 <div>
-    <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -45,6 +44,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edytuj", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.ProductID }, new {@class = "btn btn-outline-warning" }) |
     @Html.ActionLink("Powrót do listy", "Index")
 </p>
