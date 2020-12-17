@@ -1,17 +1,20 @@
-﻿using FirmaTransportowa.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FirmaTransportowa.DAL;
+using FirmaTransportowa.Models;
 
 namespace FirmaTransportowa.Controllers
 {
     public class ProductsController : Controller
     {
         private DAL.TransportContext db = new DAL.TransportContext();
+
         // GET: Products
         public ActionResult Index()
         {
@@ -40,11 +43,11 @@ namespace FirmaTransportowa.Controllers
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
+        // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductCode,Name,Scale,Description,BuyPrice,Weight")] Product product) 
+        public ActionResult Create([Bind(Include = "ProductID,Name,Description,BuyPrice,Weight")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -52,6 +55,7 @@ namespace FirmaTransportowa.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(product);
         }
 
@@ -71,11 +75,11 @@ namespace FirmaTransportowa.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
+        // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductCode,Name,Scale,Description,BuyPrice,Weight")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,BuyPrice,Weight")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -87,12 +91,6 @@ namespace FirmaTransportowa.Controllers
         }
 
         // GET: Products/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Products/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,7 +105,7 @@ namespace FirmaTransportowa.Controllers
             return View(product);
         }
 
-        // POST: Trucks/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -117,6 +115,7 @@ namespace FirmaTransportowa.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
