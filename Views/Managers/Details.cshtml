@@ -12,11 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Account.Login)
+            @Html.DisplayNameFor(model => model.ManagerID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Account.Login)
+            @Html.DisplayFor(model => model.ManagerID)
         </dd>
 
         <dt>
@@ -28,21 +28,52 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PersonDetailsID)
+            @Html.DisplayNameFor(model => model.PersonDetails.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PersonDetailsID)
+            @Html.DisplayFor(model => model.PersonDetails.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AccountID)
+            @Html.DisplayNameFor(model => model.PersonDetails.Phone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AccountID)
+            +48 @Html.DisplayFor(model => model.PersonDetails.Phone)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonDetails.Address.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonDetails.Address.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonDetails.Address.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonDetails.Address.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonDetails.Address.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonDetails.Address.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonDetails.Address.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonDetails.Address.Street)
+        </dd>
     </dl>
 </div>
 <p>

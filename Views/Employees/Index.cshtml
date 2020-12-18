@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Employees</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,19 +13,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Account.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Manager.ManagerID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PersonDetails.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PersonDetailsID)
+            @Html.DisplayNameFor(model => model.PersonDetails.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountID)
+            @Html.DisplayNameFor(model => model.Account.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manager.ManagerID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.JobTitle)
@@ -37,21 +34,20 @@
     </tr>
 
 @foreach (var item in Model) {
+    if (item.Account.Login != "admin")
+    {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Account.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manager.ManagerID)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.PersonDetails.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PersonDetailsID)
+            @Html.DisplayFor(modelItem => item.PersonDetails.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AccountID)
+            @Html.DisplayFor(modelItem => item.Account.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manager.ManagerID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.JobTitle)
@@ -60,11 +56,12 @@
             @Html.DisplayFor(modelItem => item.Salary)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
         </td>
     </tr>
+    }
 }
 
 </table>

@@ -90,7 +90,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.PersonDetails.Address.City, "City", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.PersonDetails.Address.City, new { @class = "form-control", @placeholder = "CounCitytry" })
+                @Html.TextBoxFor(m => m.PersonDetails.Address.City, new { @class = "form-control", @placeholder = "City" })
                 @Html.ValidationMessageFor(m => m.PersonDetails.Address.City, "", new { @class = "badge badge-danger" })
             </div>
         </div>

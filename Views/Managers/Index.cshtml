@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Managers</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,16 +13,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Account.Login)
+            @Html.DisplayNameFor(model => model.ManagerID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PersonDetails.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PersonDetailsID)
+            @Html.DisplayNameFor(model => model.PersonDetails.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountID)
+            @Html.DisplayNameFor(model => model.Account.Email)
         </th>
         <th></th>
     </tr>
@@ -30,16 +30,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Account.Login)
+            @Html.DisplayFor(modelItem => item.ManagerID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PersonDetails.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PersonDetailsID)
+            @Html.DisplayFor(modelItem => item.PersonDetails.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AccountID)
+            @Html.DisplayFor(modelItem => item.Account.Email)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ManagerID }) |

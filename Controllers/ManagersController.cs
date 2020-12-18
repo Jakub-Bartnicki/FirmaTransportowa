@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using FirmaTransportowa.DAL;
 using FirmaTransportowa.Models;
-using FirmaTransportowa.Controllers;
 
 namespace FirmaTransportowa.Controllers
 {
@@ -50,7 +49,7 @@ namespace FirmaTransportowa.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Manager manager)
-        {
+        {   
             var emailCheck = db.Accounts.FirstOrDefault(s => s.Email == manager.Account.Email);
             var loginCheck = db.Accounts.FirstOrDefault(s => s.Login == manager.Account.Login);
             if (emailCheck != null)
@@ -86,6 +85,7 @@ namespace FirmaTransportowa.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
         }
 
         // GET: Managers/Edit/5
@@ -100,8 +100,7 @@ namespace FirmaTransportowa.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ManagerID = new SelectList(db.Accounts, "AccountID", "Login", manager.ManagerID);
-            ViewBag.ManagerID = new SelectList(db.PersonDetails, "PersonDetailsID", "FirstName", manager.ManagerID);
+
             return View(manager);
         }
 
@@ -110,17 +109,25 @@ namespace FirmaTransportowa.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ManagerID,PersonDetailsID,AccountID")] Manager manager)
+        public ActionResult Edit(Manager manager)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(manager).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ManagerID = new SelectList(db.Accounts, "AccountID", "Login", manager.ManagerID);
-            ViewBag.ManagerID = new SelectList(db.PersonDetails, "PersonDetailsID", "FirstName", manager.ManagerID);
-            return View(manager);
+            var currentManager = db.Managers.FirstOrDefault(p => p.ManagerID == manager.ManagerID);
+            if (currentManager == null)
+                return HttpNotFound();
+
+            currentManager.Account.Login = manager.Account.Login;
+            currentManager.Account.Email = manager.Account.Email;
+            currentManager.PersonDetails.FirstName = manager.PersonDetails.FirstName;
+            currentManager.PersonDetails.LastName = manager.PersonDetails.LastName;
+            currentManager.PersonDetails.Phone = manager.PersonDetails.Phone;
+            currentManager.PersonDetails.Address.Country = manager.PersonDetails.Address.Country;
+            currentManager.PersonDetails.Address.City = manager.PersonDetails.Address.City;
+            currentManager.PersonDetails.Address.PostalCode = manager.PersonDetails.Address.PostalCode;
+            currentManager.PersonDetails.Address.Street = manager.PersonDetails.Address.Street;
+
+            db.Entry(currentManager).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Managers/Delete/5
