@@ -62,30 +62,26 @@ namespace FirmaTransportowa.Controllers
                 ViewBag.loginError = "Choose another login";
                 return View();
             }
-            else
-            {
-                manager.Account.PasswordHash = HomeController.GetMD5(manager.Account.PasswordHash);
-                manager.Account.CreationDate = DateTime.Now;
-                manager.Account.Type = "manager";
-                db.Configuration.ValidateOnSaveEnabled = false;
 
-                var account = manager.Account;
-                var personalDetails = manager.PersonDetails;
-                var address = manager.PersonDetails.Address;
+            manager.Account.PasswordHash = HomeController.GetMD5(manager.Account.PasswordHash);
+            manager.Account.CreationDate = DateTime.Now;
+            manager.Account.Type = "manager";
+            db.Configuration.ValidateOnSaveEnabled = false;
 
+            var account = manager.Account;
+            var personalDetails = manager.PersonDetails;
+            var address = manager.PersonDetails.Address;
 
-                db.Managers.Add(manager);
-                manager.PersonDetailsID = personalDetails.PersonDetailsID;
-                manager.AccountID = account.AccountID;
-                manager.PersonDetails.AddressID = address.AddressID;
-                db.SaveChanges();
-                manager.PersonDetailsID = personalDetails.PersonDetailsID;
-                manager.AccountID = account.AccountID;
-                manager.PersonDetails.AddressID = address.AddressID;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
+            db.Managers.Add(manager);
+            manager.PersonDetailsID = 0;
+            manager.AccountID = 0;
+            manager.PersonDetails.AddressID = 0;
+            db.SaveChanges();
+            manager.PersonDetailsID = personalDetails.PersonDetailsID;
+            manager.AccountID = account.AccountID;
+            manager.PersonDetails.AddressID = address.AddressID;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Managers/Edit/5

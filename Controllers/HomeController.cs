@@ -45,45 +45,39 @@ namespace FirmaTransportowa.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(Customer customer)
         {
-            if (ModelState.IsValid)
+
+            var emailCheck = db.Accounts.FirstOrDefault(s => s.Email == customer.Account.Email);
+            var loginCheck = db.Accounts.FirstOrDefault(s => s.Login == customer.Account.Login);
+            if (emailCheck != null)
             {
-                var emailCheck = db.Accounts.FirstOrDefault(s => s.Email == customer.Account.Email);
-                var loginCheck = db.Accounts.FirstOrDefault(s => s.Login == customer.Account.Login);
-                if (emailCheck != null)
-                {
-                    ViewBag.emailError = "Email already exists";
-                    return View();
-                }
-                else if (loginCheck != null)
-                {
-                    ViewBag.loginError = "Choose another login";
-                    return View();
-                }
-                else
-                {
-                    customer.Account.PasswordHash = GetMD5(customer.Account.PasswordHash);
-                    customer.Account.CreationDate = DateTime.Now;
-                    customer.Account.Type = "customer";
-                    db.Configuration.ValidateOnSaveEnabled = false;
-
-                    var account = customer.Account;
-                    var personalDetails = customer.PersonDetails;
-                    var address = customer.PersonDetails.Address;
-
-
-                    db.Customers.Add(customer);
-                    customer.PersonDetailsID = personalDetails.PersonDetailsID;
-                    customer.AccountID = account.AccountID;
-                    customer.PersonDetails.AddressID = address.AddressID;
-                    db.SaveChanges();
-                    customer.PersonDetailsID = personalDetails.PersonDetailsID;
-                    customer.AccountID = account.AccountID;
-                    customer.PersonDetails.AddressID = address.AddressID;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                ViewBag.emailError = "Email already exists";
+                return View();
             }
-            return View();
+            else if (loginCheck != null)
+            {
+                ViewBag.loginError = "Choose another login";
+                return View();
+            }
+
+            customer.Account.PasswordHash = GetMD5(customer.Account.PasswordHash);
+            customer.Account.CreationDate = DateTime.Now;
+            customer.Account.Type = "customer";
+            db.Configuration.ValidateOnSaveEnabled = false;
+
+            var account = customer.Account;
+            var personalDetails = customer.PersonDetails;
+            var address = customer.PersonDetails.Address;
+
+            db.Customers.Add(customer);
+            customer.PersonDetailsID = 0;
+            customer.AccountID = 0;
+            customer.PersonDetails.AddressID = 0;
+            db.SaveChanges();
+            customer.PersonDetailsID = personalDetails.PersonDetailsID;
+            customer.AccountID = account.AccountID;
+            customer.PersonDetails.AddressID = address.AddressID;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 

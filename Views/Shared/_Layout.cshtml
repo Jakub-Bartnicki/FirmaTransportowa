@@ -23,26 +23,36 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Trucks", "Index", "Trucks")</li>
-                    <li>@Html.ActionLink("OrderProduct", "Index", "OrderProduct")</li>
-                    <li>@Html.ActionLink("WarehouseProduct", "Index", "WarehouseProduct")</li>
-                    <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+
                     @if (Session["Login"] != null && Session["Type"].ToString() == "admin")
                     {
                         <li>@Html.ActionLink("Managers", "Index", "Managers") </li>
-                        <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
+                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                        <li>@Html.ActionLink("Trucks", "Index", "Trucks")</li>
+                        <li>@Html.ActionLink("OrderProduct", "Index", "OrderProduct")</li>
+                        <li>@Html.ActionLink("WarehouseProduct", "Index", "WarehouseProduct")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                        <li>@Html.ActionLink("Transports", "Index", "Transports")</li>
                         <li style="margin-left:30px"><a href="@Url.Action("Logout", "Home")">Logout</a></li>
                     }
                     else if (Session["Login"] != null && Session["Type"].ToString() == "customer")
                     {
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
                         <li style="margin-left:30px"><a href="@Url.Action("Logout", "Home")">Logout</a></li>
                     }
                     else if (Session["Login"] != null && Session["Type"].ToString() == "manager")
                     {
+                        <li>@Html.ActionLink("Trucks", "Index", "Trucks")</li>
+                        <li>@Html.ActionLink("OrderProduct", "Index", "OrderProduct")</li>
+                        <li>@Html.ActionLink("WarehouseProduct", "Index", "WarehouseProduct")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                        <li>@Html.ActionLink("Transports", "Index", "Transports")</li>
                         <li style="margin-left:30px"><a href="@Url.Action("Logout", "Home")">Logout</a></li>
                     }
                     else if (Session["Login"] != null && Session["Type"].ToString() == "employee")
                     {
+                        <li>@Html.ActionLink("WarehouseProduct", "Index", "WarehouseProduct")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
                         <li style="margin-left:30px"><a href="@Url.Action("Logout", "Home")">Logout</a></li>
                     }
                     else
