@@ -4,15 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Ciężarówki</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj nową ciężarówkę", "Create")
 </p>
-<table class="table">
+<table class="table table-holver">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.SemitrailerID)
+            @Html.DisplayNameFor(model => model.TruckID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RegistrationNr)
@@ -38,7 +38,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.SemitrailerID)
+            @Html.DisplayFor(modelItem => item.TruckID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RegistrationNr)
@@ -59,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.VIN)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TruckID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TruckID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TruckID })
+            @Html.ActionLink("Edytuj ciężarówkę", "Edit", new { id = item.TruckID }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Szczegóły ciężarówki", "Details", new { id = item.TruckID }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Usuń ciężarówkę", "Delete", new { id = item.TruckID }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
